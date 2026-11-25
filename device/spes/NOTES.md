@@ -22,5 +22,14 @@ Facts only, each read off the phone on 2026-11-24 from stock Android with
   checked against checksums, stored outside the repository.
 - Add the phone to the entry table in `CONTRIBUTING.md` (boot partition the
   installer may write, fastboot by buttons) before any flash.
-- Kernel and device tree: mainline has `sm6225-xiaomi-spes-sm5602` through the
-  postmarketOS tree; compare against what `linux-omamobile` needs.
+- Kernel and device tree (checked 2026-11-25): upstream mainline does NOT have
+  SM6225 or `spes` (only `sm6115*` and `sm4250*`), and neither does
+  `derekross/linux-omamobile` (`omamobile` branch, v7.3-rc6 base). The only
+  mainline-based tree that boots this phone is the community
+  `GuidixX/kernel_xiaomi_sm6225-mainline` (branch `master`, Linux 7.4-rc3,
+  DTBs `qcom/sm6225-xiaomi-spes-sm5602` and `qcom/sm6225-xiaomi-spesn`),
+  packaged in postmarketOS as `linux-postmarketos-qcom-sm6225` (device
+  `xiaomi-spes`: fastboot, boot header v3, 4096 page size, dtbo partition,
+  `super` partition, USB 05c6:9039, DTB picked by `qcom,board-id`).
+  Next: diff that tree against mainline to list the SM6225 additions, then
+  carry them onto the Omamobile kernel one commit per change.
